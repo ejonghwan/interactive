@@ -5,10 +5,12 @@ export class Copy2 {
         // window.addEventListener('click', this.console2.bind(this))
     }
 
+    aa = 1
+
     console2() {
-        console.log(this.test)
-        // this.num += 5
-        // this.test.style.marginLeft = this.num + 'px'
+        console.log(this.test, 111111)
+        this.num += 5
+        this.test.style.marginLeft = this.num + 'px'
     }
     
 }
