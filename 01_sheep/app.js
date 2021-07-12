@@ -9,15 +9,19 @@ class App {
         document.body.appendChild(this.div);
 
         this.hills = [
-            new Hill('#fd6bea', 1.2, 12),
+            new Hill('#fd6bea', 0.2, 30),
             new Hill('#ff59c2', 0.5, 8),
-            new Hill('#ff4674', 1.4, 6),
+            new Hill('#ff4674', 0.8, 10),
         ]
+
+        console.log(this.hills[0])
 
         window.addEventListener('resize', this.resize.bind(this), false)
         this.resize()
         requestAnimationFrame(this.animate.bind(this))
+        
     }
+
 
     resize() {
         this.stageWidth = document.body.clientWidth;
@@ -29,6 +33,7 @@ class App {
 
         for(let i = 0; i < this.hills.length; i++) {
             this.hills[i].resize(this.stageWidth, this.stageHeight)
+            // console.log(this.hills[i])
         }
     }
  

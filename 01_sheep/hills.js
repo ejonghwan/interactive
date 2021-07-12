@@ -11,7 +11,7 @@ export class Hill {
 
         this.points = [];
         this.gap = Math.ceil(this.stageWidth / (this.total - 2))
-
+        
         for(let i = 0; i < this.total; i++) {
             this.points[i] = {
                 x: i * this.gap,
@@ -26,9 +26,9 @@ export class Hill {
 
         let cur = this.points[0]
         let prev = cur;
-
+        // console.log(cur)
         let dots = []
-        cur.x += this.speed //speed 추가
+        // cur.x += this.speed //speed 추가
         // 언덕앞에 배열 추가
         if(cur.x > -this.gap) {
             this.points.unshift({
@@ -76,7 +76,9 @@ export class Hill {
     getY() {
         const min = this.stageHeight / 8
         const max = this.stageHeight - min
+        console.log(this.stageHeight / 8)
         return min + Math.random() * max
+
 
     }
 } 
