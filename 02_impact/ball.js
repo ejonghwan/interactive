@@ -47,7 +47,7 @@ export class Ball {
         const maxX = block.maxX + this.radius;
         const minY = block.y - this.radius;
         const maxY = block.maxY + this.radius;
-
+        // block.test()
         if(this.x > minX && this.x < maxX && this.y > minY && this.y < maxY) {
             const x1 = Math.abs(minX - this.x);
             const x2 = Math.abs(this.x - maxX);
@@ -67,5 +67,5 @@ export class Ball {
         }
 
     }
-    
+
 }

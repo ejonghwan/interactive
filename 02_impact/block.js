@@ -8,6 +8,10 @@ export class Block {
         this.maxY = height + y;
     }
 
+    test() {
+        console.log(21321)
+    }
+
     draw(ctx) {
         const xGap = 80;
         const yGap = 60;

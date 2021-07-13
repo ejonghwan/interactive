@@ -7,10 +7,10 @@ class App {
         this.ctx = this.canvas.getContext('2d')
 
         document.body.appendChild(this.canvas);
-        
+        this.resize();
         
         window.addEventListener('resize', this.resize.bind(this))
-        this.resize();
+        
 
 
         this.ball = new Ball(this.stageWidth, this.stageHeight, 20, 10)
@@ -31,6 +31,10 @@ class App {
         this.canvas.width = this.stageWidth * 2
         this.canvas.height = this.stageHeight * 2
         this.ctx.scale(2, 2)
+
+        this.ball = new Ball(this.stageWidth, this.stageHeight, 20, 10)
+        this.ball2 = new Ball(this.stageWidth, this.stageHeight, 10, 7)
+        this.ball3 = new Ball(this.stageWidth, this.stageHeight, 30, 5)
     }
 
     animate(t) {
