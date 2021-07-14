@@ -5,7 +5,7 @@ export class Wave {
         this.index = index;
         this.totalPoints = totalPoints;
         this.color = color;
-        this.points = []
+        // this.points = []
     }
 
     resize(stageWidth, stageHeight) {
@@ -27,12 +27,13 @@ export class Wave {
         
         for(let i = 0; i < this.totalPoints; i++) {
             const point = new Point(
-                this.index + i,
-                this.pointGap * i,
-                this.centerY,
+                this.index + i, //index
+                this.pointGap * i, //x
+                this.centerY, //y
             )
             this.points[i] = point;
         }
+        console.log(this.points)
     }
 
     draw(ctx) {
