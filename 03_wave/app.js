@@ -1,4 +1,4 @@
-import { Wave } from "./wave.js";
+import { WaveGroup } from "./waveGroup.js";
 
 console.log(11)
 
@@ -10,7 +10,8 @@ class App {
         this.body = document.querySelector('body')
         this.body.appendChild(this.canvas)
 
-        this.wave = new Wave();
+        this.waveGroup = new WaveGroup();
+
         this.resize();
 
         window.requestAnimationFrame(this.animate.bind(this))
@@ -24,13 +25,14 @@ class App {
         this.canvas.height = this.stageHeight * 2
         this.ctx.scale(2, 2)
 
-        this.wave.resize(this.stageWidth, this.stageHeight)
+        this.waveGroup.resize(this.stageWidth, this.stageHeight)
+
     }
 
     animate() {
         // console.log(11)
         this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight)
-        this.wave.draw(this.ctx)
+        this.waveGroup.draw(this.ctx)
         window.requestAnimationFrame(this.animate.bind(this))
     }
 }
