@@ -36,6 +36,7 @@ export class Wave {
         console.log(this.points)
     }
 
+
     draw(ctx) {
         // ctx.beginPath();
         // ctx.fillStyle = '#ff0000'

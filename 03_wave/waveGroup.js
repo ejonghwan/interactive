@@ -22,8 +22,9 @@ export class WaveGroup {
 
     resize(stageWidth, stageHeight) {
         for(let i = 0; i < this.totalWaves; i++) {
-            const wave = this.waves[i]
-            wave.resize(stageWidth, stageHeight);
+            // const wave = this.waves[i]
+            this.waves[i].resize(stageWidth, stageHeight);
+            // console.log('aa', wave)
         }
     }
 
