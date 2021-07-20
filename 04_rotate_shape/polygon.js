@@ -39,7 +39,7 @@ export class Polygon {
         ctx.translate(this.x, this.y) // 중앙으로 이동
 
 
-        this.rotate -= moveX * 0.08;
+        this.rotate += moveX * 0.008;
         ctx.rotate(this.rotate)
 
 
