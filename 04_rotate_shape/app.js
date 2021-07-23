@@ -46,7 +46,7 @@ class App {
     }
 
     animate() {
-        window.requestAnimationFrame(this.animate.bind(this))
+        // window.requestAnimationFrame(this.animate.bind(this))
 
         this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight )
         this.moveX *= 0.92
@@ -58,7 +58,7 @@ class App {
         this.isDown = true;
         this.moveX = 0;
         this.offsetX = e.clientX;
-        console.log('down')
+        // console.log('down')
         
     }
 
@@ -66,13 +66,13 @@ class App {
         if(this.isDown) {
             this.moveX = e.clientX - this.offsetX; //무브한값에서 처음값 뺴기
             this.offsetX = e.clientX; //
-            console.log('mvoe')
+            // console.log('mvoe')
         }
     }
 
     onUp(e) {
         this.isDown = false;
-        console.log('up')
+        // console.log('up')
     }
 
 
