@@ -59,8 +59,10 @@ export class Wave {
             const cx = (prevX + this.points[i].x) / 2
             const cy = (prevY + this.points[i].y) / 2
 
-            ctx.lineTo(cx, cy);
-            // ctx.quadraticCurveTo(prevX, prevY, cx, cy)
+            // ctx.lineTo(cx, cy);
+            // ctx.arc(prevX, prevY, 20, 0, 2 * Math.PI)
+            // ctx.arc(cx, cy, 20, 0, 2 * Math.PI)
+            ctx.quadraticCurveTo(prevX, prevY, cx, cy)
 
             prevX = this.points[i].x;
             prevY = this.points[i].y;
@@ -69,7 +71,8 @@ export class Wave {
         ctx.lineTo(prevX, prevY);
         ctx.lineTo(this.stageWidth, this.stageHeight);
         ctx.lineTo(this.points[0].x, this.stageHeight);
-        ctx.fill();
+        // ctx.fill();
+        ctx.stroke()
         ctx.closePath();
     }
 
