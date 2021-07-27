@@ -19,8 +19,8 @@ class App {
         this.resize();
 
 
-        this.radius = 10;
-        this.pixelSize = 30;
+        this.radius = 3;
+        this.pixelSize = 6;
         this.dots = []
 
 
@@ -62,11 +62,13 @@ class App {
     }
 
     drawImage() {
-        const stageRatio = this.stageWidth / this.stageWidth;
+        const stageRatio = this.stageWidth / this.stageHeight;
         const imgRatio = this.image.width / this.image.height;
 
         this.imgPos.width = this.stageWidth;
         this.imgPos.height = this.stageHeight;
+
+        console.log(this.image.width, this.stageWidth)
 
         if(imgRatio > stageRatio) {
             this.imgPos.width = Math.round(this.image.width * (this.stageHeight / this.image.height))
