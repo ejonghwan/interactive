@@ -68,7 +68,6 @@ class App {
         this.imgPos.width = this.stageWidth;
         this.imgPos.height = this.stageHeight;
 
-        console.log(this.image.width, this.stageWidth)
 
         if(imgRatio > stageRatio) {
             this.imgPos.width = Math.round(this.image.width * (this.stageHeight / this.image.height))
@@ -96,7 +95,7 @@ class App {
 
         
         this.imgData = this.tmpCtx.getImageData(0, 0, this.stageWidth, this.stageHeight)
-
+        console.log(this.imgData.data[2])
         this.drawDots();
     }
 
