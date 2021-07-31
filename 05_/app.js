@@ -2,6 +2,7 @@ import { Ripple } from './ripple.js'
 import { Dot } from './dot.js'
 import { collide } from './utils.js'
 
+
 class App {
     constructor() {
         this.canvas = document.createElement('canvas')
@@ -95,7 +96,7 @@ class App {
 
         
         this.imgData = this.tmpCtx.getImageData(0, 0, this.stageWidth, this.stageHeight)
-        console.log(this.imgData.data[2])
+        console.log(this.imgData.data)
         this.drawDots();
     }
 
