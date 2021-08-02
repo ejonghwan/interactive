@@ -1,4 +1,5 @@
 import { Hill } from './hills.js'
+import { SheepCon } from './SheepCon.js'
 
 class App {
     constructor() {
@@ -13,8 +14,10 @@ class App {
             new Hill('#ff59c2', 0.5, 8),
             new Hill('#ff4674', 0.8, 10),
         ]
+        // console.log(this.hills[0])
 
-        console.log(this.hills[0])
+        this.sheepCon = new SheepCon()
+
 
         window.addEventListener('resize', this.resize.bind(this), false)
         this.resize()
@@ -35,6 +38,9 @@ class App {
             this.hills[i].resize(this.stageWidth, this.stageHeight)
             // console.log(this.hills[i])
         }
+
+        this.sheepCon.resize(this.stageWidth, this.stageHeight)
+
     }
  
     animate(t) {
@@ -45,6 +51,9 @@ class App {
         for(let i = 0; i < this.hills.length; i++) {
             dots = this.hills[i].draw(this.ctx)
         }
+
+
+        this.sheepCon.draw(this.ctx, t, dots)
     }
 
 }
