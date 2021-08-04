@@ -39,6 +39,8 @@ export class Hill {
             this.points.splice(-1)
         }
 
+        // console.log(this.points)
+
         cxt.moveTo(cur.x, cur.y)
         let prevCx = cur.x;
         let prevCy = cur.y

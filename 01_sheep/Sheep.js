@@ -50,7 +50,7 @@ export class Sheep {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(closest.rotation) //atan2 추가
-        console.log(closest.rotation)
+        // console.log(closest.rotation)
         ctx.fillStyle = '#000';
         // ctx.fillRect(
         //     -this.sheepWidthHalf,
