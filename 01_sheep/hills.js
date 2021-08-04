@@ -26,10 +26,8 @@ export class Hill {
 
         let cur = this.points[0]
         let prev = cur;
-        // console.log(cur)
         let dots = []
-        // cur.x += this.speed //speed 추가
-        // 언덕앞에 배열 추가
+       
         if(cur.x > -this.gap) {
             this.points.unshift({
                 x: -(this.gap * 2),
@@ -39,7 +37,6 @@ export class Hill {
             this.points.splice(-1)
         }
 
-        // console.log(this.points)
 
         cxt.moveTo(cur.x, cur.y)
         let prevCx = cur.x;
