@@ -1,3 +1,4 @@
+import { BLOCKS } from './Blocks.js'
 
 //dom
 const ground = document.querySelector('.ground > ul')
@@ -14,14 +15,7 @@ let duration = 500;
 let downInterval;
 let tempMovingItem;
 
-const BLOCKS = {
-    tree: [
-        [[2, 1], [0, 1], [1, 0], [1, 1]],
-        [],
-        [],
-        [],
-    ]
-}
+
 
 const movingItem = {
     type: "tree",
@@ -40,40 +34,41 @@ init();
 function init() {
     tempMovingItem = {...movingItem};
 
-    for(let i = 0; i < GAME_ROWS; i++) {
-        prependNewLine()
-    }
-
+    prependNewLine()
     renderBlocks()
+
+ 
 }
 
 
 
 function prependNewLine() {
-    const li = document.createElement('li');
-    const ul = document.createElement('ul');
-    ground.prepend(li)
-    li.prepend(ul);
-    
 
-    for(let j = 0; j < GAME_COLS; j++) {
-        const matrix = document.createElement('li');
-        ul.prepend(matrix);
+    for(let i = 0; i < GAME_ROWS; i++) {
+        const li = document.createElement('li');
+        const ul = document.createElement('ul');
+        ground.prepend(li)
+        li.prepend(ul);
+
+        for(let j = 0; j < GAME_COLS; j++) {
+            const matrix = document.createElement('li');
+            ul.prepend(matrix);
+        }
     }
-    
+
 }
 
 
-function renderBlocks() {
+function renderBlocks(moveType = '') {
     const { type, direction, top, left } = tempMovingItem;
     const movingBlocks = document.querySelectorAll('.moving')
 
     movingBlocks.forEach( moving => {
-        console.log(moving)
+        // console.log(moving)
         moving.classList.remove(type, "moving")
     })
 
-    BLOCKS[type][direction].forEach(block => {
+    BLOCKS[type][direction].some(block => {
         const x = block[0] + left;
         const y = block[1] + top;
         const target = ground.childNodes[y] ? ground.childNodes[y].childNodes[0].childNodes[x] : null;
@@ -85,7 +80,11 @@ function renderBlocks() {
             tempMovingItem = {...movingItem} //원상복귀
             setTimeout(() => { //모든 스택이 비웠을 때
                 renderBlocks()
+                if(moveType === 'top') {
+                    seizeBlock();
+                }
             }, 0)
+            return true; //forEach 대신 some return true를 쓴 이유는 ? else에 걸렸을 때 한개의 블럭만 걸리게. 기본적으로 반복은 블록의 개수만큼 돌리기 때문
         }
 
         // console.log(target)
@@ -96,8 +95,37 @@ function renderBlocks() {
     movingItem.direction = direction
 }
 
+function seizeBlock() {
+    console.log('seize block')
+    const movingBlocks = document.querySelectorAll('.moving')
+
+    movingBlocks.forEach( moving => {
+        // console.log(moving)
+        moving.classList.remove("moving")
+        moving.classList.add("seized")
+    })
+
+    blockGenerater()
+}
+
+
+
+function blockGenerater() {
+    const obj = Object.entries(BLOCKS)
+    const randomIndex = Math.floor(Math.random() * obj.length)
+    
+
+    movingItem.type = obj[randomIndex][0]
+    movingItem.top = 0;
+    movingItem.left = 3;
+    movingItem.direction = 0;
+    tempMovingItem = {...movingItem}
+    renderBlocks();
+
+}
+
 function checkEmpty(target) {
-    if(!target) {
+    if(!target || target.classList.contains('seized')) {
         return false
     };
 
@@ -106,6 +134,13 @@ function checkEmpty(target) {
 
 function moveBlock(moveType, amount) {
     tempMovingItem[moveType] += amount;
+    renderBlocks(moveType)
+}
+
+function changeDirction() {
+
+    const direction = tempMovingItem.direction;
+    direction === 3 ? tempMovingItem.direction = 0 : tempMovingItem.direction += 1
     renderBlocks()
 }
 
@@ -114,17 +149,24 @@ window.addEventListener('keydown', e => {
     switch(e.keyCode) {
         case 39: {
             return moveBlock('left', 1)
-            // break
+            break
         }
 
         case 37: {
             return moveBlock('left', -1)
-            // break
+            break
         }
 
         case 40: {
             return moveBlock('top', 1)
+            break
         }
+
+        case 38: {
+            return changeDirction()
+            break
+        }
+
 
 
         default: {
