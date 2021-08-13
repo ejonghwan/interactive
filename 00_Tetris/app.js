@@ -34,8 +34,11 @@ init();
 function init() {
     tempMovingItem = {...movingItem};
 
-    prependNewLine()
-    renderBlocks()
+    for(let i = 0; i < GAME_ROWS; i++) {
+        prependNewLine()
+    }
+    // renderBlocks()
+    blockGenerater()
 
  
 }
@@ -43,8 +46,6 @@ function init() {
 
 
 function prependNewLine() {
-
-    for(let i = 0; i < GAME_ROWS; i++) {
         const li = document.createElement('li');
         const ul = document.createElement('ul');
         ground.prepend(li)
@@ -54,8 +55,6 @@ function prependNewLine() {
             const matrix = document.createElement('li');
             ul.prepend(matrix);
         }
-    }
-
 }
 
 
@@ -79,7 +78,7 @@ function renderBlocks(moveType = '') {
         } else {
             tempMovingItem = {...movingItem} //원상복귀
             setTimeout(() => { //모든 스택이 비웠을 때
-                renderBlocks()
+                renderBlocks('retry')
                 if(moveType === 'top') {
                     seizeBlock();
                 }
@@ -105,12 +104,39 @@ function seizeBlock() {
         moving.classList.add("seized")
     })
 
+    // blockGenerater()
+    checkMatch();
+}
+
+function checkMatch() {
+
+    const childNodes = ground.childNodes;
+    childNodes.forEach(child => {
+        let matched = true;
+        child.children[0].childNodes.forEach(li => {
+
+            if(!li.classList.contains('seized')) {
+                matched = false;
+            }
+        })
+        if(matched) {
+            child.remove();
+            prependNewLine()
+        }
+       
+    })
+
     blockGenerater()
 }
 
 
-
 function blockGenerater() {
+
+    clearInterval(downInterval)
+    downInterval = setInterval(() => {
+        moveBlock('top', 1)
+    }, duration)
+
     const obj = Object.entries(BLOCKS)
     const randomIndex = Math.floor(Math.random() * obj.length)
     
@@ -144,6 +170,12 @@ function changeDirction() {
     renderBlocks()
 }
 
+function dropBlock() {
+    clearInterval(downInterval)
+    downInterval = setInterval(() => {
+        moveBlock('top', 1)
+    }, 10)
+}
 
 window.addEventListener('keydown', e => {
     switch(e.keyCode) {
@@ -164,6 +196,11 @@ window.addEventListener('keydown', e => {
 
         case 38: {
             return changeDirction()
+            break
+        }
+
+        case 32: {
+            return dropBlock()
             break
         }
 
