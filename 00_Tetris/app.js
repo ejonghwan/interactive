@@ -2,7 +2,16 @@ import { BLOCKS } from './Blocks.js'
 
 //dom
 const ground = document.querySelector('.ground > ul')
+const gameover = document.querySelector('.gameover')
+const reStart = document.querySelector('button')
+const scoreEle = document.querySelector('.score')
 
+reStart.addEventListener('click', function() {
+    ground.innerHTML = '';
+    gameover.style.display = 'none'
+    score = 0;
+    init();
+})
 
 // setting
 const GAME_ROWS = 20;
@@ -77,6 +86,10 @@ function renderBlocks(moveType = '') {
             target.classList.add(type, "moving")
         } else {
             tempMovingItem = {...movingItem} //원상복귀
+            if(moveType === 'retry') {
+                clearInterval(downInterval)
+                showGameover()
+            }
             setTimeout(() => { //모든 스택이 비웠을 때
                 renderBlocks('retry')
                 if(moveType === 'top') {
@@ -94,6 +107,10 @@ function renderBlocks(moveType = '') {
     movingItem.direction = direction
 }
 
+function showGameover() {
+    gameover.style.display = 'flex'
+}
+
 function seizeBlock() {
     console.log('seize block')
     const movingBlocks = document.querySelectorAll('.moving')
@@ -109,7 +126,6 @@ function seizeBlock() {
 }
 
 function checkMatch() {
-
     const childNodes = ground.childNodes;
     childNodes.forEach(child => {
         let matched = true;
@@ -122,6 +138,9 @@ function checkMatch() {
         if(matched) {
             child.remove();
             prependNewLine()
+            score += 1
+            scoreEle.innerHTML = score
+            
         }
        
     })
