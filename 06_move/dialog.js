@@ -41,15 +41,25 @@ export class Dialog {
     }
 
     down(point) {
-
+        if(point.collide(this.pos, WIDTH, HEIGHT)) {
+            this.isDown = true;
+            this.startPos = this.pos.clone();
+            this.downPos = point.clone();
+            this.mousePos = point.clone().subtract(this.pos);
+            return this
+        } else {
+            return null;
+        }
     }
 
     move(point) {
-        
+        if(this.isDown) {
+            this.target = this.startPos.clone().add(point).subtract(this.downPos)
+        }
     }
 
     up(point) {
-        
+        this.isDown = false;
     }
 
 
