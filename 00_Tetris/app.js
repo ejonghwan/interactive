@@ -72,7 +72,6 @@ function renderBlocks(moveType = '') {
     const movingBlocks = document.querySelectorAll('.moving')
 
     movingBlocks.forEach( moving => {
-        // console.log(moving)
         moving.classList.remove(type, "moving")
     })
 
